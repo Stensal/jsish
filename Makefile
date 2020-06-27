@@ -172,7 +172,7 @@ else
 
 ifneq ($(BUILDSYS),FreeBSD)
 ifneq ($(BUILDSYS),Cygwin)
-CFLAGS += -frecord-gcc-switches
+CFLAGS += 
 endif
 endif
 STATICLIBS += $(SQLITELIB)
@@ -205,7 +205,6 @@ LD=$(XCPREFIX)ld
 
 ifeq ($(TARGET),musl)
 PROGFLAGS += -DJSI__MUSL
-CC=musl-gcc
 endif
 
 CCPATH := $(shell which $(CC) )
@@ -420,7 +419,7 @@ printconf:
 	@echo $(EXPECT_CONFIG_VER)
 
 uchroot: src/uchroot.c
-	gcc -g -o uchroot src/uchroot.c && sudo chown root.root uchroot && sudo chmod u+s uchroot
+	$(CC) -g -o uchroot src/uchroot.c && sudo chown root.root uchroot && sudo chmod u+s uchroot
 	
 test:
 	./jsish -u tests
